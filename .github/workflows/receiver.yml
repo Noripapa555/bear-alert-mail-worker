@@ -33,7 +33,7 @@ jobs:
       - name: Receive, save, remove processed mail, and dispatch
         env:
           BEAR_MAIL_PASSWORD: ${{ secrets.BEAR_MAIL_PASSWORD }}
-          BEAR_MAIL_HOST: ${{ vars.BEAR_MAIL_HOST }}
-          BEAR_MAIL_ADDRESS: ${{ vars.BEAR_MAIL_ADDRESS }}
+          BEAR_MAIL_HOST: ${{ secrets.BEAR_MAIL_HOST }}
+          BEAR_MAIL_ADDRESS: ${{ secrets.BEAR_MAIL_ADDRESS }}
           BEAR_FIREBASE_PROJECT: ${{ vars.BEAR_FIREBASE_PROJECT }}
         run: python mail_ingest.py --apply --publish

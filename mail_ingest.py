@@ -181,6 +181,10 @@ def main():
     try:
         client.login(config['username'], password)
         password = None
+        status, capabilities = client.capability()
+        if status != 'OK':
+            raise RuntimeError('Cannot confirm server capabilities')
+        client.capabilities = tuple(b' '.join(capabilities).upper().split())
         print(json.dumps(run(client, config, sources, store, apply=args.apply)))
         if args.publish:
             print(json.dumps(store.dispatch()))

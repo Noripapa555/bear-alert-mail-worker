@@ -34,7 +34,8 @@ GitHubの実行遅延・実行漏れ、自治体の配信遅延、FCM未達が�
 ## 本番有効化前の設定
 
 - Repository secret: `BEAR_MAIL_PASSWORD`（所有者が画面から入力）
-- Repository variables: `BEAR_MAIL_HOST`, `BEAR_MAIL_ADDRESS`, `BEAR_FIREBASE_PROJECT`
+- 接続先と専用アドレスも公開ログへ出ないようSecrets `BEAR_MAIL_HOST`, `BEAR_MAIL_ADDRESS` に保存。
+- Repository variables: `BEAR_FIREBASE_PROJECT`
 - `GCP_WORKLOAD_IDENTITY_PROVIDER`, `GCP_MAIL_SERVICE_ACCOUNT`
 - Google Cloud Workload Identity Federationで、このリポジトリのmainブランチだけを信頼。
 - 専用サービスアカウントにFirestore操作とFCM送信権限を付与。長期秘密鍵は作成しない。
