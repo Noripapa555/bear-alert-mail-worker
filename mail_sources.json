@@ -1,0 +1,19 @@
+{
+  "schema": 1,
+  "sources": [
+    {
+      "id": "hokkaido_police_hokutokun",
+      "name": "北海道警察 ほくとくん防犯メール",
+      "region": "hokkaido",
+      "official_url": "https://www.police.pref.hokkaido.lg.jp/info/seian/bouhan_mail/bouhan_mail.html",
+      "registration_address": "touroku@mmg.police.pref.hokkaido.lg.jp",
+      "registration_status": "not_registered",
+      "checked_at": "2026-10-15",
+      "enabled": false,
+      "reuse_reviewed": false,
+      "senders": [],
+      "signing_domains": [],
+      "unnecessary_subject_patterns": []
+    }
+  ]
+}
