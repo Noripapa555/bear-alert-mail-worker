@@ -28,7 +28,8 @@ def alert_payload(content):
     if not content['sourceUrl'].startswith('https://'):
         raise ValueError('Official source URL must be HTTPS')
     titles = {l: LABELS[l][0] + ' / ' + content['sourceName'] for l in LOCALES}
-    bodies = {l: LABELS[l][1] + '\n' + content['text'] + '\n' + content['sourceName'] for l in LOCALES}
+    bodies = {l: LABELS[l][1] + '\n' + content['text'] + '\n' + content['sourceName']
+              + '\n' + content['issuedAt'] + '\n' + content['sourceUrl'] for l in LOCALES}
     return dict(titles=titles, bodies=bodies, region=content['region'],
                 sourceUrl=content['sourceUrl'], sourceName=content['sourceName'],
                 sourceType='municipality_email', originalLanguage='ja')
@@ -130,7 +131,11 @@ class MailStore:
             for locale in LOCALES:
                 message = {
                     'condition': "'bear_all_" + locale + "' in topics || 'bear_" + content['region'] + '_' + locale + "' in topics",
-                    'notification': {'title': public['titles'][locale], 'body': public['bodies'][locale]},
+                    # Keep the complete extracted text, source and issued time
+                    # in Firestore. Push contains a bounded preview, not the full mail.
+                    'notification': {'title': public['titles'][locale],
+                                     'body': LABELS[locale][1] + '\n' + content['text'][:180]
+                                             + ('…' if len(content['text']) > 180 else '')},
                     'data': {'alertId': key, 'region': content['region']},
                     'apns': {'headers': {'apns-expiration': str(int(expires.timestamp()))},
                              'payload': {'aps': {'sound': 'default'}}}}

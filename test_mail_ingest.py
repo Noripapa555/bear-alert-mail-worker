@@ -109,12 +109,36 @@ class ReceiverTests(unittest.TestCase):
 
 
 class StoreTests(unittest.TestCase):
+    def test_full_text_is_saved_but_all_six_push_previews_fit(self):
+        from mail_protocol import encode
+        import json
+        content = classify(message(issued=dt.datetime.now(dt.timezone.utc)), [SOURCE], verifier=lambda *_: True)['content']
+        content['text'] = '熊' + '🐻' * 799
+        document = {'name': 'projects/test/databases/(default)/documents/mail_jobs/mail_test',
+                    'updateTime': 'revision', 'fields': {'content': encode(content), 'state': encode('queued')}}
+        query = Mock(status_code=200)
+        query.json.return_value = [{'document': document}]
+        ok = Mock(status_code=200)
+        ok.json.return_value = {'name': 'TEST_ONLY'}
+        session = Mock()
+        session.post.side_effect = [query, ok] + [ok] * 6
+        session.patch.return_value = Mock(status_code=200)
+        self.assertEqual(MailStore(session).dispatch()['sent'], 1)
+        public_body = session.post.call_args_list[1].kwargs['json']['writes'][0]['update']['fields']['bodies']['mapValue']['fields']['ja']['stringValue']
+        self.assertIn(content['text'], public_body)
+        for call in session.post.call_args_list[2:]:
+            payload = call.kwargs['json']['message']
+            self.assertLess(len(json.dumps(payload, ensure_ascii=False).encode()), 4000)
+            self.assertLess(len(payload['notification']['body']), 300)
+
     def test_translated_labels_do_not_claim_translated_original(self):
         content = classify(message(), [SOURCE], now=NOW, verifier=lambda *_: True)['content']
         payload = alert_payload(content)
         self.assertEqual(len(payload['bodies']), 6)
         self.assertIn('Japanese original', payload['bodies']['en'])
         self.assertIn(content['text'], payload['bodies']['fr'])
+        self.assertIn(content['issuedAt'], payload['bodies']['ja'])
+        self.assertIn(content['sourceUrl'], payload['bodies']['ja'])
 
     def test_uncertain_delivery_is_not_retried(self):
         content = classify(message(issued=dt.datetime.now(dt.timezone.utc)), [SOURCE], verifier=lambda *_: True)['content']
