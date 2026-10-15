@@ -59,6 +59,32 @@
       "senders": [],
       "signing_domains": [],
       "unnecessary_subject_patterns": []
+    },
+    {
+      "id": "fukui_bear_mail",
+      "name": "福井クマ情報",
+      "region": "fukui",
+      "official_url": "https://tsukinowaguma.pref.fukui.lg.jp/",
+      "reuse_status": "terms_clarification_pending",
+      "checked_at": "2026-10-15",
+      "enabled": false,
+      "reuse_reviewed": false,
+      "senders": [],
+      "signing_domains": [],
+      "unnecessary_subject_patterns": []
+    },
+    {
+      "id": "fukushima_bear_mail",
+      "name": "POLICEメールふくしま",
+      "region": "fukushima",
+      "official_url": "https://www.police.pref.fukushima.jp/seianki/homepage/police_mail/police_mail.html",
+      "reuse_status": "terms_clarification_pending",
+      "checked_at": "2026-10-15",
+      "enabled": false,
+      "reuse_reviewed": false,
+      "senders": [],
+      "signing_domains": [],
+      "unnecessary_subject_patterns": []
     }
   ]
 }
