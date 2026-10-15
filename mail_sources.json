@@ -44,6 +44,21 @@
       "senders": [],
       "signing_domains": [],
       "unnecessary_subject_patterns": []
+    },
+    {
+      "id": "aomori_kumalog",
+      "name": "青森県 くまログあおもり",
+      "region": "aomori",
+      "official_url": "https://kumalog-aomori.info/",
+      "official_reference_url": "https://www.pref.aomori.lg.jp/soshiki/kankyo/shizen/kumalog_aomori.html",
+      "terms_url": "https://kumalog-aomori.info/term",
+      "reuse_status": "clarification_draft_pending_user_send_approval",
+      "checked_at": "2026-10-15",
+      "enabled": false,
+      "reuse_reviewed": false,
+      "senders": [],
+      "signing_domains": [],
+      "unnecessary_subject_patterns": []
     }
   ]
 }
