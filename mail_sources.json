@@ -15,6 +15,21 @@
       "senders": [],
       "signing_domains": [],
       "unnecessary_subject_patterns": []
+    },
+    {
+      "id": "akita_kumadas",
+      "name": "秋田県 クマダス",
+      "region": "akita",
+      "official_url": "https://kumadas.net/",
+      "official_reference_url": "https://www.pref.akita.lg.jp/pages/archive/23295",
+      "terms_url": "https://kumadas.net/term",
+      "reuse_status": "clarification_requested_akita_nature_conservation",
+      "checked_at": "2026-10-15",
+      "enabled": false,
+      "reuse_reviewed": false,
+      "senders": [],
+      "signing_domains": [],
+      "unnecessary_subject_patterns": []
     }
   ]
 }
